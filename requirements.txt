@@ -4,6 +4,7 @@ itsdangerous
 Jinja2
 MarkupSafe
 Werkzeug
+openpyxl
 numpy
 pandas
 sklearn
