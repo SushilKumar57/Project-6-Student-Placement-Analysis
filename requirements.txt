@@ -10,10 +10,6 @@ sklearn
 scipy
 scikit-learn
 matplotlib
-pandas
 flasgger
 streamlit
 nltk
-
-
-
