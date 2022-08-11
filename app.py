@@ -13,6 +13,7 @@ import pickle
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
   
@@ -21,41 +22,50 @@ def home():
 @app.route('/predict',methods=['GET'])
 def predict():
     
-    Tenth               = float(request.args.get('Tenth'))
-    Twelfth             = float(request.args.get('Twelfth'))
-    B_Tech              = float(request.args.get('B_Tech'))
-    Seventh_SEM      = float(request.args.get('Seventh_SEM'))
-    Sixth_SEM         = float(request.args.get('Sixth_SEM'))
-    Fifth_SEM          = float(request.args.get('Fifth_SEM'))
-    Final_Performance = float(request.args.get('Final_Performance'))
-    Medium             = int(request.args.get('Medium'))
-    model1             = float(request.args.get('model1'))
-    
-    if model1==0:
-      model=pickle.load(open('education_linearreg.pkl', 'rb'))
-    elif model1==1:
-      model=pickle.load(open('education_Logisticreg.pkl', 'rb'))
-    elif model1==2:
-      model=pickle.load(open('education_Decision_Tree.pkl', 'rb'))
-    elif model1==3:
-      model=pickle.load(open('education_kernal_svm.pkl', 'rb')) 
-    elif model1==4:
-      model=pickle.load(open('education_linear_svm.pkl', 'rb'))
-    elif model1==5:
-      model=pickle.load(open('education_randomforest.pkl', 'rb'))
-    elif model1==6:
-      model=pickle.load(open('education_KNN.pkl', 'rb')) 
-    elif model1==7:
-      model=pickle.load(open('education_nb.pkl', 'rb'))
-    elif model1==8:
-      model=pickle.load(open('education_kmeanscluster.pkl', 'rb'))      
-
     dataset= pd.read_excel('DATASET education.xlsx')
     X = dataset.iloc[:, 0:8].values
     from sklearn.preprocessing import StandardScaler
     sc = StandardScaler()
     X = sc.fit_transform(X)
-    prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    
+    Tenth             = float(request.args.get('Tenth'))
+    Twelfth           = float(request.args.get('Twelfth'))
+    B_Tech            = float(request.args.get('B_Tech'))
+    Seventh_SEM       = float(request.args.get('Seventh_SEM'))
+    Sixth_SEM         = float(request.args.get('Sixth_SEM'))
+    Fifth_SEM         = float(request.args.get('Fifth_SEM'))
+    Final_Performance = float(request.args.get('Final_Performance'))
+    Medium            = int(request.args.get('Medium'))
+    model1            = float(request.args.get('model1'))
+    
+    if model1==0:
+      model=pickle.load(open('education_linearreg.pkl', 'rb'))
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    elif model1==1:
+      model=pickle.load(open('education_Logisticreg.pkl', 'rb'))
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    elif model1==2:
+      model=pickle.load(open('education_Decision_Tree.pkl', 'rb'))
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    elif model1==3:
+      model=pickle.load(open('education_kernal_svm.pkl', 'rb')) 
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    elif model1==4:
+      model=pickle.load(open('education_linear_svm.pkl', 'rb'))
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    elif model1==5:
+      model=pickle.load(open('education_randomforest.pkl', 'rb'))
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    elif model1==6:
+      model=pickle.load(open('education_KNN.pkl', 'rb')) 
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    elif model1==7:
+      model=pickle.load(open('education_nb.pkl', 'rb'))
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+    elif model1==8:
+      model=pickle.load(open('education_kmeanscluster.pkl', 'rb'))      
+      prediction = model.predict(sc.transform([[Tenth, Twelfth, B_Tech, Seventh_SEM, Sixth_SEM, Fifth_SEM, Final_Performance, Medium]]))
+
     if prediction==0:
       output="Student is Not Placed"
     else:
